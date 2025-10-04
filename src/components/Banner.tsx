@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Wind } from 'lucide-react';
 import './estilos/Banner.css'; 
 

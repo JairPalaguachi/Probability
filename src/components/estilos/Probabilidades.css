@@ -1,0 +1,217 @@
+.probabilidades-root {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #dbeafe 0%, #eff6ff 100%);
+  padding: 24px;
+}
+
+.probabilidades-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.probabilidades-title {
+  text-align: center;
+  color: #edeef0;
+  align-items: center;
+}
+
+.probabilidades-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.probabilidades-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.probabilidades-btn {
+  background: #fff;
+  color: #2563eb;
+  padding: 10px 24px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: none;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.probabilidades-btn:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+  background: #f3f4f6;
+}
+
+.probabilidades-info-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.probabilidades-info-title {
+  color: #334155;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.probabilidades-info-desc {
+  color: #64748b;
+}
+
+.probabilidades-section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+
+.probabilidades-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.probabilidades-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  padding: 20px;
+}
+
+.probabilidades-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.probabilidades-card-icon-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.probabilidades-card-title {
+  font-weight: bold;
+  color: #1e293b;
+  margin: 0;
+}
+
+.probabilidades-card-subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.probabilidades-badge {
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.probabilidades-badge.moderado {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.probabilidades-badge.muy-alto {
+  background: #f3f4f6;
+  color: #64748b;
+}
+
+.probabilidades-badge.alto {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.probabilidades-prob-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.probabilidades-prob-label {
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.probabilidades-prob-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.probabilidades-progress-bar-bg {
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.probabilidades-progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.5s;
+}
+
+.probabilidades-progress-bar-fill.blue {
+  background: #2563eb;
+}
+
+.probabilidades-progress-bar-fill.yellow {
+  background: #facc15;
+}
+
+.probabilidades-progress-bar-fill.gray {
+  background: #64748b;
+}
+
+.probabilidades-card-desc {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-top: 10px;
+}
+
+.probabilidades-note {
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.probabilidades-note-icon {
+  color: #2563eb;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.probabilidades-note-content {
+  flex: 1;
+}
+
+.probabilidades-note-title {
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.probabilidades-note-desc {
+  font-size: 0.95rem;
+  color: #334155;
+}

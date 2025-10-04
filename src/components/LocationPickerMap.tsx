@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Navigation, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import './estilos/LocationPickerMap.css';
-
 
 declare global {
   interface Window {
     L: any;
   }
 }
-
 
 export default function LocationPickerMap() {
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
@@ -17,6 +16,7 @@ export default function LocationPickerMap() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const markerRef = useRef<any>(null);
   const leafletMapRef = useRef<any>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Cargar Leaflet CSS
@@ -138,6 +138,13 @@ export default function LocationPickerMap() {
     setAddress('');
   };
 
+  // Nuevo: función para consultar y navegar a probabilidades.html
+  const consultarProbabilidades = () => {
+    if (position) {
+      navigate(`/probabilidades?lat=${position.lat}&lng=${position.lng}`);
+    }
+  };
+
   return (
     <div className="location-picker-root">
       {/* Header */}
@@ -211,6 +218,18 @@ export default function LocationPickerMap() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Botón debajo del mapa */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
+        <button
+          className="location-picker-btn"
+          style={{ fontWeight: 'bold', fontSize: '1.1rem', padding: '14px 32px' }}
+          onClick={consultarProbabilidades}
+          disabled={!position}
+        >
+          Consultar Probabilidades
+        </button>
       </div>
     </div>
   );

@@ -11,11 +11,13 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   padding: 24px 0 16px 0;
   z-index: 10;
+  
 }
 
 .location-picker-header-content {
   max-width: 900px;
   margin: 0 auto;
+  align-items: center;
 }
 
 .location-picker-title {
@@ -26,11 +28,13 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .location-picker-subtitle {
   color: #6b7280;
   font-size: 1rem;
+  text-align: center;
 }
 
 .location-picker-map-container {
