@@ -24,7 +24,6 @@ function MainPage() {
             <p>Fecha del Evento</p>
             <FechaPicker/>
             <CheckBoxFuncional/>
-            <button>Analizar Probabilidades</button>
           </div>
 
         </div>

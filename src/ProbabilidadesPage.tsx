@@ -14,8 +14,8 @@ export default function ProbabilidadesPage() {
                 <Banner />
             </div>
             
-            <div className="probabilidades-title" style={{ padding: 40 }}>
-                <h1 > Probabilidades Meteorológicas</h1>
+            <div style={{ padding: 40 }}>
+                <h1 className="probabilidades-title" > Probabilidades Meteorológicas</h1>
                 <Probabilidades />
                 <p>Latitud: {lat}</p>
                 <p>Longitud: {lng}</p>
