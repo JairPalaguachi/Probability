@@ -1,4 +1,3 @@
-import React from 'react';
 import { Cloud, CheckCircle, Mountain, Tent, Calendar, Compass } from 'lucide-react';
 import './estilos/InfoPanel.css';
 
