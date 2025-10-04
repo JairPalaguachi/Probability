@@ -2,7 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LocationPickerMap from './components/LocationPickerMap';
 import InfoPanel from './components/InfoPanel';
 import Banner from './components/Banner';
-import ProbabilidadesPage from './ProbabilidadesPage'; // Asegúrate de que la ruta sea correcta
+import ProbabilidadesPage from './ProbabilidadesPage';
+import CheckBoxFuncional from './components/CheckBoxFuncional';
+import { FechaPicker } from './components/FechaPicker';
 
 
 function MainPage() {
@@ -18,6 +20,13 @@ function MainPage() {
         </div>
         <div className="app-grid-right">
           <LocationPickerMap />
+          <div>
+            <p>Fecha del Evento</p>
+            <FechaPicker/>
+            <CheckBoxFuncional/>
+            <button>Analizar Probabilidades</button>
+          </div>
+
         </div>
       </div>
     </>
