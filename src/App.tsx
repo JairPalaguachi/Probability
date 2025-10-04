@@ -7,6 +7,7 @@ import CheckBoxFuncional from './components/CheckBoxFuncional';
 import { FechaPicker } from './components/FechaPicker';
 
 
+
 function MainPage() {
   return (
     <>
