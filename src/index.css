@@ -1,25 +1,52 @@
 .app-grid {
   display: grid;
-  grid-template-columns: 3fr 2.3fr;
+  grid-template-columns: 4fr 2.3fr;
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
   width: 100%;
-  max-width: 1200px;
+  flex: 1 1 auto;
+  height: 100%;
 }
 
-.info-panel {
-  width: 100%;
-  max-width: 400px;
+.app-grid-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  color:  rgb(10, 10, 10);
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 5%;
 }
+
+.app-grid-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.banner-container {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgba(10, 10, 156, 0.652);
+  flex-shrink: 0;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  width: 100%;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #676cdd;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1e40af 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -38,10 +65,12 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {

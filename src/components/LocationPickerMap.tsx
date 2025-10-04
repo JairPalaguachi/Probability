@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import { MapPin, Navigation, Trash2 } from 'lucide-react';
+import './estilos/LocationPickerMap.css';
 
 
 declare global {
@@ -139,42 +139,32 @@ export default function LocationPickerMap() {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col bg-gray-50">
+    <div className="location-picker-root">
       {/* Header */}
-      <div className="bg-white shadow-md p-4 z-10">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2 mb-3">
-            <MapPin className="text-red-500" size={32} />
+      <div className="location-picker-header">
+        <div className="location-picker-header-content">
+          <h1 className="location-picker-title">
+            <MapPin style={{ color: '#ef4444' }} size={32} />
             Selector de Ubicación
           </h1>
-          <p className="text-gray-600 text-sm">
+          <p className="location-picker-subtitle">
             Haz clic en el mapa para seleccionar una ubicación exacta
           </p>
         </div>
       </div>
 
       {/* Map Container */}
-      <div className="flex-1 relative flex justify-center items-center" style={{ minHeight: '500px', maxHeight: '80vh' }}>
+      <div className="location-picker-map-container">
         <div
           ref={mapRef}
-          style={{
-            width: '100%',
-            maxWidth: '500px',
-            height: '100%',
-            minHeight: '500px',
-            maxHeight: '80vh',
-            borderRadius: '1rem',
-            boxShadow: '0 2px 16px rgba(0,0,0,0.12)',
-            margin: '0 auto',
-          }}
-          className="responsive-map"
+          className="location-picker-map"
         />
         
         {/* Controls */}
-        <div className="absolute top-4 right-4 flex flex-col gap-2 z-[1000]">
+        <div className="location-picker-controls">
           <button
             onClick={getCurrentLocation}
-            className="bg-white hover:bg-gray-50 text-gray-700 p-3 rounded-lg shadow-lg transition-all hover:shadow-xl"
+            className="location-picker-btn"
             title="Usar mi ubicación actual"
           >
             <Navigation size={20} />
@@ -182,7 +172,7 @@ export default function LocationPickerMap() {
           {position && (
             <button
               onClick={clearSelection}
-              className="bg-white hover:bg-gray-50 text-red-600 p-3 rounded-lg shadow-lg transition-all hover:shadow-xl"
+              className="location-picker-btn red"
               title="Limpiar selección"
             >
               <Trash2 size={20} />
@@ -192,30 +182,30 @@ export default function LocationPickerMap() {
 
         {/* Info Panel */}
         {position && (
-          <div className="absolute bottom-4 left-4 right-4 bg-white rounded-lg shadow-xl p-4 z-[1000] max-w-2xl mx-auto">
-            <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-              <MapPin className="text-red-500" size={20} />
+          <div className="location-picker-info-panel">
+            <h3 className="location-picker-info-title">
+              <MapPin style={{ color: '#ef4444' }} size={20} />
               Ubicación Seleccionada
             </h3>
             
-            <div className="space-y-2">
-              <div className="flex gap-4 text-sm">
-                <div className="flex-1">
-                  <span className="text-gray-500 font-medium">Latitud:</span>
-                  <p className="text-gray-800 font-mono">{position?.lat.toFixed(6)}</p>
+            <div>
+              <div className="location-picker-info-row">
+                <div>
+                  <span className="location-picker-info-label">Latitud:</span>
+                  <div className="location-picker-info-value">{position?.lat.toFixed(6)}</div>
                 </div>
-                <div className="flex-1">
-                  <span className="text-gray-500 font-medium">Longitud:</span>
-                  <p className="text-gray-800 font-mono">{position?.lng.toFixed(6)}</p>
+                <div>
+                  <span className="location-picker-info-label">Longitud:</span>
+                  <div className="location-picker-info-value">{position?.lng.toFixed(6)}</div>
                 </div>
               </div>
               
               <div>
-                <span className="text-gray-500 font-medium text-sm">Dirección:</span>
+                <span className="location-picker-info-address-label">Dirección:</span>
                 {loading ? (
-                  <p className="text-gray-600 italic text-sm mt-1">Cargando dirección...</p>
+                  <div className="location-picker-info-loading">Cargando dirección...</div>
                 ) : (
-                  <p className="text-gray-800 text-sm mt-1">{address}</p>
+                  <div className="location-picker-info-address-value">{address}</div>
                 )}
               </div>
             </div>
