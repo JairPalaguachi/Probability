@@ -1,6 +1,8 @@
 import LocationPickerMap from './components/LocationPickerMap';
 import InfoPanel from './components/InfoPanel';
 import Banner from './components/Banner';
+import CheckBoxFuncional from './components/CheckBoxFuncional';
+import { FechaPicker } from './components/FechaPicker';
 
 
 function App() {
@@ -16,6 +18,13 @@ function App() {
         </div>
         <div className="app-grid-right">
           <LocationPickerMap />
+          <div>
+            <p>Fecha del Evento</p>
+            <FechaPicker/>
+            <CheckBoxFuncional/>
+            <button>Analizar Probabilidades</button>
+          </div>
+
         </div>
       </div>
     </>
