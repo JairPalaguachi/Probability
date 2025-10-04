@@ -83,16 +83,30 @@ export default function LocationPickerMap() {
 
   const getAddress = async (lat: number, lng: number) => {
     setLoading(true);
+    setAddress("");
+    let didTimeout = false;
+    const timeout = setTimeout(() => {
+      didTimeout = true;
+      setAddress("Dirección no disponible (tiempo de espera excedido)");
+      setLoading(false);
+    }, 3000);
     try {
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`
       );
-      const data = await response.json();
-      setAddress(data.display_name || 'Dirección no disponible');
+      if (!didTimeout) {
+        const data = await response.json();
+        clearTimeout(timeout);
+        setAddress(data.display_name || 'Dirección no disponible');
+        setLoading(false);
+      }
     } catch (error) {
-      setAddress('Error al obtener la dirección');
+      if (!didTimeout) {
+        clearTimeout(timeout);
+        setAddress('Error al obtener la dirección');
+        setLoading(false);
+      }
     }
-    setLoading(false);
   };
 
   const getCurrentLocation = () => {
@@ -130,7 +144,7 @@ export default function LocationPickerMap() {
       <div className="bg-white shadow-md p-4 z-10">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2 mb-3">
-            <MapPin className="text-red-500" size={28} />
+            <MapPin className="text-red-500" size={32} />
             Selector de Ubicación
           </h1>
           <p className="text-gray-600 text-sm">
@@ -140,8 +154,21 @@ export default function LocationPickerMap() {
       </div>
 
       {/* Map Container */}
-      <div className="flex-1 relative" style={{ minHeight: '400px' }}>
-        <div ref={mapRef} style={{ width: '100%', height: '100%', minHeight: '400px' }} />
+      <div className="flex-1 relative flex justify-center items-center" style={{ minHeight: '500px', maxHeight: '80vh' }}>
+        <div
+          ref={mapRef}
+          style={{
+            width: '100%',
+            maxWidth: '500px',
+            height: '100%',
+            minHeight: '500px',
+            maxHeight: '80vh',
+            borderRadius: '1rem',
+            boxShadow: '0 2px 16px rgba(0,0,0,0.12)',
+            margin: '0 auto',
+          }}
+          className="responsive-map"
+        />
         
         {/* Controls */}
         <div className="absolute top-4 right-4 flex flex-col gap-2 z-[1000]">
@@ -192,17 +219,6 @@ export default function LocationPickerMap() {
                 )}
               </div>
             </div>
-
-            <button
-              onClick={() => {
-                const coords = `${position?.lat.toFixed(6)}, ${position?.lng.toFixed(6)}`;
-                navigator.clipboard.writeText(coords);
-                alert('Coordenadas copiadas al portapapeles');
-              }}
-              className="mt-3 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium"
-            >
-              Copiar Coordenadas
-            </button>
           </div>
         )}
       </div>
