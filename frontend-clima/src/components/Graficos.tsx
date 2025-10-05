@@ -51,7 +51,8 @@ export const Graficos = () => {
     }
     
     const { Latitud, Longitud } = apiData.Ubicacion;
-    const url = `http://127.0.0.1:5000/api/clima-historico?lat=${Latitud}&lon=${Longitud}&fecha=${originalDate}&hora=${originalTime}&formato=csv`;
+    const API_URL = "https://Javaguti25.pythonanywhere.com";
+    const url = `${API_URL}/api/clima-historico?lat=${Latitud}&lon=${Longitud}&fecha=${originalDate}&hora=${originalTime}&formato=csv`;
     
     window.open(url, '_blank');
   };
@@ -84,7 +85,7 @@ export const Graficos = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Minimo" fill="#8884d8" />
+            <Bar dataKey="Minimo" fill="  #030216ff" />
             <Bar dataKey="Promedio" fill="#82ca9d" />
             <Bar dataKey="Maximo" fill="#ffc658" />
           </BarChart>
