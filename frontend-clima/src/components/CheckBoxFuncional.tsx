@@ -1,76 +1,74 @@
-import Checkbox from '@mui/material/Checkbox'; 
+import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
-import { useState } from 'react';
+import React from 'react';
 
-export default function CheckBoxFuncional() {
-    const [clima, setClima] = useState({
-        muyCaliente: false,
-        muyFrio: false,
-        muyVentoso: false,
-        muyHumedo: false,
-        muyIncomodo: false,
-    });
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setClima({
-            ...clima, 
-            [event.target.name]: event.target.checked,
-        });
-    };
+interface ClimaOptions {
+  muyCaliente: boolean;
+  muyFrio: boolean;
+  muyVentoso: boolean;
+  muyHumedo: boolean;
+  muyIncomodo: boolean;
+}
 
-    return (
-        <FormGroup>
-            <FormControlLabel
-                label="Muy caliente"
-                control={
-                    <Checkbox
-                        
-                        checked={clima.muyCaliente}
-                        onChange={handleChange}
-                        name="muyCaliente"
-                    />
-                }
-            />
-            <FormControlLabel
-                label="Muy Frio"
-                control={
-                    <Checkbox
-                        checked={clima.muyFrio}
-                        onChange={handleChange}
-                        name="muyFrio"
-                    />
-                }
-            />
-            <FormControlLabel
-                label="Muy Ventoso"
-                control={
-                    <Checkbox
-                        checked={clima.muyVentoso}
-                        onChange={handleChange}
-                        name="muyVentoso"
-                    />
-                }
-            />
-            <FormControlLabel
-                label="Muy Húmedo"
-                control={
-                    <Checkbox
-                        checked={clima.muyHumedo}
-                        onChange={handleChange}
-                        name="muyHumedo"
-                    />
-                }
-            />
-            <FormControlLabel
-                label="Muy Incómodo"
-                control={
-                    <Checkbox
-                        checked={clima.muyIncomodo}
-                        onChange={handleChange}
-                        name="muyIncomodo"
-                    />
-                }
-            />
-        </FormGroup>
-    );
+interface CheckBoxFuncionalProps {
+  clima: ClimaOptions;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function CheckBoxFuncional({ clima, onChange }: CheckBoxFuncionalProps) {
+  return (
+    <FormGroup>
+      <FormControlLabel
+        label="Muy caliente"
+        control={
+          <Checkbox
+            checked={clima.muyCaliente}
+            onChange={onChange}
+            name="muyCaliente"
+          />
+        }
+      />
+      <FormControlLabel
+        label="Muy Frio"
+        control={
+          <Checkbox
+            checked={clima.muyFrio}
+            onChange={onChange}
+            name="muyFrio"
+          />
+        }
+      />
+      <FormControlLabel
+        label="Muy Ventoso"
+        control={
+          <Checkbox
+            checked={clima.muyVentoso}
+            onChange={onChange}
+            name="muyVentoso"
+          />
+        }
+      />
+      <FormControlLabel
+        label="Muy Húmedo"
+        control={
+          <Checkbox
+            checked={clima.muyHumedo}
+            onChange={onChange}
+            name="muyHumedo"
+          />
+        }
+      />
+      <FormControlLabel
+        label="Muy Incómodo"
+        control={
+          <Checkbox
+            checked={clima.muyIncomodo}
+            onChange={onChange}
+            name="muyIncomodo"
+          />
+        }
+      />
+    </FormGroup>
+  );
 }
