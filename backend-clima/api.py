@@ -60,11 +60,28 @@ def generar_estadisticas_climaticas(lat, lon, fecha_str, hora="12:00:00"):
         return {"error": "No se pudieron obtener datos históricos para la ubicación y fecha especificadas."}, pd.DataFrame()
 
     df = pd.DataFrame(resultados)
+    total_years = len(df)
+
     estadisticas = {
         'Ubicacion': {'Pais': pais, 'Ciudad': ciudad, 'Latitud': lat, 'Longitud': lon}
     }
     columnas_numericas = ['Temperatura (Celcius)', 'Precipitacion 24h (mm)', 'Velocidad del viento (m/s)', 'Humedad relativa (%)']
 
+    # --- Cálculo de Probabilidades de Condiciones Extremas ---
+    if total_years > 0:
+        probabilidades = {
+            'Temp. > 35°C (Calor)': round((df[df['Temperatura (Celcius)'] > 35].shape[0] / total_years) * 100),
+            'Temp. < 5°C (Frío)': round((df[df['Temperatura (Celcius)'] < 5].shape[0] / total_years) * 100),
+            # 40 km/h es aprox 11.1 m/s
+            'Viento > 40km/h': round((df[df['Velocidad del viento (m/s)'] > 11.1].shape[0] / total_years) * 100),
+            'Humedad > 80%': round((df[df['Humedad relativa (%)'] > 80].shape[0] / total_years) * 100),
+            # Usamos 20mm como umbral para precipitación intensa
+            'Precip. > 20mm (Intensa)': round((df[df['Precipitacion 24h (mm)'] > 20].shape[0] / total_years) * 100),
+        }
+        estadisticas['Probabilidades'] = probabilidades
+
+
+    # --- Cálculo de Estadísticas (Min, Max, Promedio) ---
     for col in columnas_numericas:
         if col in df.columns and df[col].notna().any():
             estadisticas[col] = {
@@ -77,7 +94,7 @@ def generar_estadisticas_climaticas(lat, lon, fecha_str, hora="12:00:00"):
 
 @app.route('/')
 def index():
-    return jsonify({"status": "API de clima histórico funcionando"})
+    return jsonify({"status": "API de clima historico funcionando"})
 
 
 @app.route('/api/clima-historico')

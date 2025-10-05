@@ -6,7 +6,7 @@ import InfoPanel from './components/InfoPanel';
 import LocationPickerMap from './components/LocationPickerMap';
 import { FechaPicker } from './components/FechaPicker';
 import CheckBoxFuncional from './components/CheckBoxFuncional';
-import ProbabilidadesPage from './ProbabilidadesPage';
+
 
 type Position = {
   lat: number;
@@ -112,7 +112,6 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/probabilidades" element={<ProbabilidadesPage />} />
         <Route path="/graficos" element={<Graficos />} />
       </Routes>
     </BrowserRouter>
