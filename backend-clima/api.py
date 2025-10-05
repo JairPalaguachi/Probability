@@ -5,9 +5,9 @@ from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
-<<<<<<< HEAD
+CORS(app) 
 app.config['JSON_AS_ASCII'] = False
+
 USERNAME = "caizapasto_samir"
 PASSWORD = "d257xIAe7M5XNt9HcpYY"
 YEARS = 10
