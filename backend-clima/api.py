@@ -5,7 +5,8 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  
+CORS(app)
+app.config['JSON_AS_ASCII'] = False
 
 USERNAME = "caizapasto_samir"
 PASSWORD = "d257xIAe7M5XNt9HcpYY"
@@ -44,9 +45,9 @@ def generar_estadisticas_climaticas(lat, lon, fecha_str):
                     value = param_data.get('coordinates', [{}])[0].get('dates', [{}])[0].get('value')
                     if value is not None:
                         if 't_2m:C' in param_name:
-                            registro['Temperatura (°C)'] = value
+                            registro['Temperatura (Celcius)'] = value
                         elif 'precip_24h:mm' in param_name:
-                            registro['Precipitación 24h (mm)'] = value
+                            registro['Precipitacion 24h (mm)'] = value
                         elif 'wind_speed_10m:ms' in param_name:
                             registro['Velocidad del viento (m/s)'] = value
                         elif 'relative_humidity_2m:p' in param_name:
@@ -61,20 +62,25 @@ def generar_estadisticas_climaticas(lat, lon, fecha_str):
 
     df = pd.DataFrame(resultados)
     estadisticas = {
-        'Ubicación': {'País': pais, 'Ciudad': ciudad, 'Latitud': lat, 'Longitud': lon}
+        'Ubicacion': {'Pais': pais, 'Ciudad': ciudad, 'Latitud': lat, 'Longitud': lon}
     }
-    columnas_numericas = ['Temperatura (°C)', 'Precipitación 24h (mm)', 'Velocidad del viento (m/s)', 'Humedad relativa (%)']
+    columnas_numericas = ['Temperatura (Celcius)', 'Precipitacion 24h (mm)', 'Velocidad del viento (m/s)', 'Humedad relativa (%)']
 
     for col in columnas_numericas:
         if col in df.columns and df[col].notna().any():
             estadisticas[col] = {
                 'Promedio': round(df[col].mean(), 2),
-                'Máximo': round(df[col].max(), 2),
-                'Mínimo': round(df[col].min(), 2)
+                'Maximo': round(df[col].max(), 2),
+                'Minimo': round(df[col].min(), 2)
             }
     return estadisticas
 
 # --- Definición de la Ruta (Endpoint) de la API ---
+
+@app.route('/')
+def index():
+    return jsonify({"status": "API de clima histórico funcionando"})
+
 
 @app.route('/api/clima-historico')
 def get_clima_historico():
