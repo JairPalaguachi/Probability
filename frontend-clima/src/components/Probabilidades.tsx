@@ -1,6 +1,7 @@
 import React from 'react';
-import { Thermometer, Snowflake, Wind, Droplets, CloudRain, AlertCircle } from 'lucide-react';
+import { Thermometer, Snowflake, Wind, Droplets, CloudRain, AlertCircle, Link } from 'lucide-react';
 import './estilos/Probabilidades.css';
+import { useNavigate } from 'react-router-dom';
 
 interface WeatherCondition {
   id: string;
@@ -13,6 +14,7 @@ interface WeatherCondition {
 }
 
 export default function Probabilidades() {
+  const navigate = useNavigate();
   const analysisDate = {
     lat: '22.3176',
     lng: '-99.4523',
@@ -90,8 +92,8 @@ export default function Probabilidades() {
         {/* Header */}
         <div className="probabilidades-header">
           <h1 className="probabilidades-title">Resultados del Análisis</h1>
-          <button className="probabilidades-btn">
-            Nueva Consulta
+          <button className="probabilidades-btn" onClick={()=> navigate("/graficos")}>
+            <span>Ver Gráficos</span>
           </button>
         </div>
 
