@@ -1,8 +1,7 @@
-// En tu archivo: src/components/LocationPickerMap.tsx
-
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MapPin, Navigation, Trash2 } from 'lucide-react';
 import './estilos/LocationPickerMap.css';
+
 
 declare global {
   interface Window {

@@ -1,6 +1,5 @@
 import { Cloud, CheckCircle, Mountain, Tent, Calendar, Compass } from 'lucide-react';
 import './estilos/InfoPanel.css';
-import React from 'react';
 
 interface InfoPanelProps {
   lat: number | undefined;
