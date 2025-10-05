@@ -42,7 +42,7 @@
 }
 
 .info-panel-subtitle {
-  color: #dbeafe;
+  color: #000000;
   font-size: 1.25rem;
   margin-bottom: 48px;
   line-height: 1.5;
@@ -51,7 +51,7 @@
 .info-panel-features-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #fff;
+  color: #000000;
   margin-bottom: 24px;
 }
 
@@ -65,7 +65,7 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  color: #fff;
+  color: #141414;
   font-size: 1.125rem;
   margin-bottom: 16px;
 }

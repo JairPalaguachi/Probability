@@ -81,13 +81,13 @@ export const Graficos = () => {
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="name" color='black' />
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Minimo" fill="  #030216ff" />
-            <Bar dataKey="Promedio" fill="#82ca9d" />
-            <Bar dataKey="Maximo" fill="#ffc658" />
+            <Bar dataKey="Minimo" fill="  #dcf552ff" />
+            <Bar dataKey="Promedio" fill="#4679e7ff" />
+            <Bar dataKey="Maximo" fill="#df1717ff" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -106,7 +106,7 @@ export const Graficos = () => {
                 <YAxis label={{ value: '%', angle: -90, position: 'insideLeft' }} />
                 <Tooltip formatter={(value) => `${value}%`} />
                 <Legend />
-                <Bar dataKey="Probabilidad" fill="#d946ef" />
+                <Bar dataKey="Probabilidad" fill="#0a0a0aff" />
               </BarChart>
             </ResponsiveContainer>
           </div>

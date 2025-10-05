@@ -19,8 +19,8 @@ CORS(app, resources={
 app.config['JSON_AS_ASCII'] = False
 
 # Usar variables de entorno si están disponibles, sino usar los valores por defecto
-USERNAME = os.environ.get("METEOMATICS_USERNAME", "caizapasto_samir")
-PASSWORD = os.environ.get("METEOMATICS_PASSWORD", "d257xIAe7M5XNt9HcpYY")
+USERNAME = os.environ.get("METEOMATICS_USERNAME", "palaguachi_jair")
+PASSWORD = os.environ.get("METEOMATICS_PASSWORD", "yjj7f1fAJ9842NbIG4sk")
 YEARS = 10
 
 def generar_estadisticas_climaticas(lat, lon, fecha_str, hora="12:00:00"):
