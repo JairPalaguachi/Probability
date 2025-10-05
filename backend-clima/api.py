@@ -8,9 +8,6 @@ app = Flask(__name__)
 CORS(app)
 <<<<<<< HEAD
 app.config['JSON_AS_ASCII'] = False
-=======
->>>>>>> origin/main
-
 USERNAME = "caizapasto_samir"
 PASSWORD = "d257xIAe7M5XNt9HcpYY"
 YEARS = 10
