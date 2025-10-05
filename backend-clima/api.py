@@ -3,13 +3,24 @@ import pandas as pd
 from datetime import datetime, timedelta
 from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
-CORS(app) 
+
+# Configurar CORS para permitir requests desde cualquier origen
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["*"],  # En producción puedes cambiar esto por tu dominio específico de Vercel
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
+
 app.config['JSON_AS_ASCII'] = False
 
-USERNAME = "caizapasto_samir"
-PASSWORD = "d257xIAe7M5XNt9HcpYY"
+# Usar variables de entorno si están disponibles, sino usar los valores por defecto
+USERNAME = os.environ.get("METEOMATICS_USERNAME", "caizapasto_samir")
+PASSWORD = os.environ.get("METEOMATICS_PASSWORD", "d257xIAe7M5XNt9HcpYY")
 YEARS = 10
 
 def generar_estadisticas_climaticas(lat, lon, fecha_str, hora="12:00:00"):
@@ -80,7 +91,6 @@ def generar_estadisticas_climaticas(lat, lon, fecha_str, hora="12:00:00"):
         }
         estadisticas['Probabilidades'] = probabilidades
 
-
     # --- Cálculo de Estadísticas (Min, Max, Promedio) ---
     for col in columnas_numericas:
         if col in df.columns and df[col].notna().any():
@@ -94,7 +104,7 @@ def generar_estadisticas_climaticas(lat, lon, fecha_str, hora="12:00:00"):
 
 @app.route('/')
 def index():
-    return jsonify({"status": "API de clima historico funcionando"})
+    return jsonify({"status": "API de clima historico funcionando", "version": "1.0"})
 
 
 @app.route('/api/clima-historico')
@@ -103,7 +113,7 @@ def get_clima_historico():
     lon = request.args.get('lon')
     fecha = request.args.get('fecha')
     formato = request.args.get('formato')
-    hora = request.args.get('hora')
+    hora = request.args.get('hora', '12:00:00')  # Valor por defecto si no se proporciona
 
     if not all([lat, lon, fecha]):
         return jsonify({"error": "Faltan parámetros. Se requiere lat, lon y fecha."}), 400
@@ -131,4 +141,6 @@ def get_clima_historico():
         return jsonify({"error": "Ocurrió un error interno en el servidor."}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    # Solo para desarrollo local
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
