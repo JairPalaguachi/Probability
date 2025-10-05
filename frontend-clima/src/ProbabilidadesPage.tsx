@@ -13,6 +13,7 @@ export default function ProbabilidadesPage() {
             <div className="probabilidades-title" style={{ padding: 40 }}>
                 
                 <Probabilidades />
+                
 
             </div>
         </>

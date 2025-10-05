@@ -1,8 +1,5 @@
-
-
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
-
 import { 
     BarChart, 
     Bar, 
@@ -17,6 +14,8 @@ import {
 export const Graficos = () => {
   const location = useLocation();
   const apiData = location.state?.apiData;
+  const originalDate = location.state?.originalDate;
+  const originalTime = location.state?.originalTime;
 
   if (!apiData) {
     return (
@@ -28,24 +27,41 @@ export const Graficos = () => {
     );
   }
 
-
   const chartData = Object.keys(apiData)
-    .filter(key => key !== 'Ubicación') 
-    .map(key => {
-
-      const name = key.substring(0, key.indexOf(' ')); 
-      return {
-        name: name, 
-        ...apiData[key] 
-      };
-    });
+    .filter(key => key !== 'Ubicación')
+    .map(key => ({
+      name: key.substring(0, key.indexOf(' ')),
+      ...apiData[key]
+    }));
+    
+  const handleDownloadCSV = () => {
+    if (!apiData?.Ubicación || !originalDate || !originalTime) {
+      alert("No se pueden descargar los datos porque falta información de la consulta original.");
+      return;
+    }
+    
+    const { Latitud, Longitud } = apiData.Ubicación;
+    const url = `http://127.0.0.1:5000/api/clima-historico?lat=${Latitud}&lon=${Longitud}&fecha=${originalDate}&hora=${originalTime}&formato=csv`;
+    
+    window.open(url, '_blank');
+  };
 
   return (
     <div style={{ padding: '40px', fontFamily: 'sans-serif' }}>
-      <h1>Análisis Climático para {apiData.Ubicación.Ciudad}</h1>
-      <p>Resumen de datos históricos para la fecha seleccionada en los últimos 10 años.</p>
-
-
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+        <div>
+          <h1>Análisis Climático para {apiData.Ubicación.Ciudad}</h1>
+          <p>Resumen de datos para la fecha {originalDate}.</p>
+          <p><strong>Hora de corte:</strong> {originalTime}</p>
+        </div>
+        <button 
+          onClick={handleDownloadCSV}
+          style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer', marginLeft: '20px' }}
+        >
+          Descargar CSV (Datos Detallados)
+        </button>
+      </div>
+      
       <div style={{ width: '100%', height: 400, marginTop: '40px' }}>
         <ResponsiveContainer>
           <BarChart
@@ -57,7 +73,6 @@ export const Graficos = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            
             <Bar dataKey="Mínimo" fill="#8884d8" />
             <Bar dataKey="Promedio" fill="#82ca9d" />
             <Bar dataKey="Máximo" fill="#ffc658" />

@@ -1,20 +1,19 @@
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  
+CORS(app)
 
 USERNAME = "caizapasto_samir"
 PASSWORD = "d257xIAe7M5XNt9HcpYY"
 YEARS = 10
 
-
-def generar_estadisticas_climaticas(lat, lon, fecha_str):
+def generar_estadisticas_climaticas(lat, lon, fecha_str, hora="12:00:00"):
     fecha_obj = datetime.strptime(fecha_str, "%d-%m-%y")
-    hora = "12:00:00"
+    
     try:
         location_url = f"https://us1.locationiq.com/v1/reverse?key=pk.7341bc5d2594bcb57705ec5503a9e84b&lat={lat}&lon={lon}&format=json"
         location_response = requests.get(location_url, timeout=10)
@@ -57,7 +56,7 @@ def generar_estadisticas_climaticas(lat, lon, fecha_str):
             continue
 
     if not resultados:
-        return {"error": "No se pudieron obtener datos históricos para la ubicación y fecha especificadas."}
+        return {"error": "No se pudieron obtener datos históricos para la ubicación y fecha especificadas."}, pd.DataFrame()
 
     df = pd.DataFrame(resultados)
     estadisticas = {
@@ -72,20 +71,38 @@ def generar_estadisticas_climaticas(lat, lon, fecha_str):
                 'Máximo': round(df[col].max(), 2),
                 'Mínimo': round(df[col].min(), 2)
             }
-    return estadisticas
-
-# --- Definición de la Ruta (Endpoint) de la API ---
+            
+    return estadisticas, df
 
 @app.route('/api/clima-historico')
 def get_clima_historico():
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     fecha = request.args.get('fecha')
+    formato = request.args.get('formato')
+    hora = request.args.get('hora')
+
     if not all([lat, lon, fecha]):
         return jsonify({"error": "Faltan parámetros. Se requiere lat, lon y fecha."}), 400
     try:
-        resultado = generar_estadisticas_climaticas(float(lat), float(lon), fecha)
-        return jsonify(resultado)
+        estadisticas, df_datos = generar_estadisticas_climaticas(float(lat), float(lon), fecha, hora)
+        
+        if "error" in estadisticas:
+            return jsonify(estadisticas), 404
+
+        if formato and formato.lower() == 'csv':
+            filename = f"historico_climatico_{lat}_{lon}_{fecha}.csv"
+            csv_output = df_datos.to_csv(index=False)
+            
+            return Response(
+                csv_output,
+                mimetype="text/csv",
+                headers={"Content-disposition":
+                         f"attachment; filename={filename}"}
+            )
+        else:
+            return jsonify(estadisticas)
+
     except Exception as e:
         print(f"Error inesperado: {e}")
         return jsonify({"error": "Ocurrió un error interno en el servidor."}), 500
