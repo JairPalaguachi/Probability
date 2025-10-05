@@ -44,7 +44,7 @@ function MainPage() {
 
   const handleConsultarClima = async () => {
     if (!position || !selectedDate) {
-      setError("Por favor, selecciona una ubicación en el mapa y una fecha.");
+      setError("Por favor, selecciona una ubicación en el mapa y una fecha. ");
       return;
     }
 
