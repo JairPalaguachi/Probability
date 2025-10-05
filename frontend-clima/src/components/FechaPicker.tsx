@@ -1,14 +1,14 @@
-// En tu archivo: src/components/FechaPicker.tsx
-
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs, { Dayjs } from 'dayjs';
 
 
+
 interface FechaPickerProps {
 
+  
   onDateChange: (date: Date | null) => void;
 }
 
