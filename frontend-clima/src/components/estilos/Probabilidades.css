@@ -1,18 +1,16 @@
 .probabilidades-root {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #dbeafe 0%, #eff6ff 100%);
+  background: linear-gradient(to bottom, #79abec 0%, #7b9ac3 100%);
   padding: 24px;
+  border-radius: 16px;
 }
 
 .probabilidades-container {
   max-width: 700px;
   margin: 0 auto;
 }
-.probabilidades-title {
-  text-align: center;
-  color: #edeef0;
-  align-items: center;
-}
+
+
 
 .probabilidades-header {
   display: flex;
@@ -24,7 +22,8 @@
 .probabilidades-title {
   font-size: 2rem;
   font-weight: bold;
-  color: #1e293b;
+  color: #ffffff;
+  text-align: center;
 }
 
 .probabilidades-btn {

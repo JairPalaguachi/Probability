@@ -11,7 +11,7 @@ export default function InfoPanel({ lat, lng }: InfoPanelProps) {
   const features = [
     {
       icon: <Mountain className="info-panel-feature-icon" />,
-      text: "Explorar actividades al aire libre"
+      text: "Explorar actividades al aire libre sin preocupaciones"
     },
     {
       icon: <Tent className="info-panel-feature-icon" />,
