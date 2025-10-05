@@ -56,8 +56,8 @@ function MainPage() {
     const year = String(selectedDate.getFullYear()).slice(-2);
     const formattedDate = `${day}-${month}-${year}`;
     const formattedTime = selectedDate.toTimeString().split(' ')[0];
-    const url = `http://127.0.0.1:5000/api/clima-historico?lat=${position.lat}&lon=${position.lng}&fecha=${formattedDate}&hora=${formattedTime}`;
-
+    const API_URL = "https://Javaguti25.pythonanywhere.com";
+    const url = `${API_URL}/api/clima-historico?lat=${position.lat}&lon=${position.lng}&fecha=${formattedDate}&hora=${formattedTime}`;
     try {
       const response = await fetch(url);
       if (!response.ok) throw new Error("Error en la respuesta del servidor.");
